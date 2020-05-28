@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+ 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter = _counter + 2;
+       var randomGen = Random();
+      _counter = randomGen.nextInt(20) + 1 ;
     });
   }
 
@@ -98,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Your IQ is equal to the number below:',
+              'Quick! Roll initiative!',
             ),
             Text(
               '$_counter',
