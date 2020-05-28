@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Amazing Flutter',
+      title: 'Goblin Scouter',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'One day you will learn:',
+              'Your IQ is equal to the number below:',
             ),
             Text(
               '$_counter',
