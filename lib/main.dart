@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             Text(
-             'You are attacked by a wild goblin!'
+             'You are attacked by a BIGGO goblin!'
             ),
             
             for (var monster in monList) Text(monster),
