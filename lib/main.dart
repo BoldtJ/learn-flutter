@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './quiz.dart';
+import './result.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -18,44 +19,67 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
-  final questions = const [
+  var _totalScore = 0;
+  final _questions = const [
     {
       'questionText': 'What\' is your favorite color?',
-      'answers': ['Black', 'Red', 'Blue', 'Green']
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 6},
+        {'text': 'Blue', 'score': 2},
+        {'text': 'Green', 'score': 2}
+      ]
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ['Raven', 'Pig', 'Snake', 'Turtle']
+      'answers': [
+        {'text': 'Raven', 'score': 1},
+        {'text': 'Pig', 'score': 1},
+        {'text': 'Snake', 'score': 7},
+        {'text': 'Turtle', 'score': 9}
+      ]
     },
     {
       'questionText': 'What is your favorite food?',
-      'answers': ['Pizza', 'Spaghetti', 'Pork']
+      'answers': [
+        {'text': 'Pizza', 'score': 3},
+        {'text': 'Spaghetti', 'score': 7},
+        {'text': 'Pork', 'score': 1}
+      ]
     },
     {
       'questionText': 'What is your name?',
-      'answers': ['No', 'Nope', 'Fuck you']
+      'answers': [
+        {'text': 'No', 'score': 3},
+        {'text': 'Nope', 'score': 7},
+        {'text': 'Fuck you', 'score': 9}
+      ]
     },
   ];
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
     // var aBool = true;
     // aBool = false;
+
+    _totalScore += score;
 
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
     print(_questionIndex);
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       print('WE have more questions!');
+    }  else {
+      print('Quiz complete, intialize reset');
     }
   }
 
-  void _quizReset() {
+  void quizReset() {
     setState(() {
       _questionIndex = 0;
     });
 
-    print('quiz rest');
+    print('quiz reset');
   }
 
   @override
@@ -69,14 +93,15 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My First App'),
+          title: Text('App Progress 0.07b'),
         ),
-        body: _questionIndex < questions.length
-            ? Quiz(_answerQuestion, _questions)
-            : Column(children: [
-                Text('Congratulations, you finished the quiz!'),
-                Answer(_quizReset, 'Click to restart quiz')
-              ]),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(_totalScore),
       ),
     );
   }
